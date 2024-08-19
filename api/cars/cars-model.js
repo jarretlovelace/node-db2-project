@@ -13,8 +13,11 @@ const getByVin = (vin) => {
 };
 
 const create = (car) => {
-  return db('cars').insert(car).returning('*').then(rows => rows[0]);
-};
+  return db('cars').insert(car)
+  .then(([id]) => {
+  return getById(id)
+})
+}
 
 module.exports = {
   getAll,
